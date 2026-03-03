@@ -2,6 +2,7 @@ import express from "express";
 import { env } from "process";
 import productRouter from "./router/product_router.js";
 import mongoose from "mongoose";
+import cors from "cors"
 
 const PORT = process.env.PORT || 8000
 
@@ -10,6 +11,7 @@ mongoose.connect("mongodb+srv://admin:xBFMFIRMUKnxa5Zs@cluster0.vgeygpg.mongodb.
 .catch(()=>{console.log("connection error")});
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(productRouter);
 
