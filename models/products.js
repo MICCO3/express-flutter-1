@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { type } from "os";
 
 
 const ProductSchema = new mongoose.Schema({
@@ -9,6 +10,10 @@ const ProductSchema = new mongoose.Schema({
     price:{
         type:Number,
         required:true
+    },
+    url:{
+        type:String,
+        requied: true
     },
     instock:{
         type:Boolean,
