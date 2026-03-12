@@ -14,7 +14,7 @@ router.get("/api/products/all", async(req,res)=>{
 router.get("/api/products/:id", 
     param("id")
     .isMongoId().withMessage("invalid ID")
-    .notEmpty().withMessage("Id can't be empty").isE, 
+    .notEmpty().withMessage("Id can't be empty"), 
     async(req,res)=>{
         const result = validationResult(req);
         if(!result.isEmpty())return res.statusCode(400).send({msg:"Invalid ID"});
