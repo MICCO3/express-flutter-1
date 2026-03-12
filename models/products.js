@@ -11,6 +11,9 @@ const ProductSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    description:{
+        type:String
+    },
     url:{
         type:String,
         requied: true
