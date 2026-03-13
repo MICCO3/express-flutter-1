@@ -24,9 +24,10 @@ router.get("/api/products/:id",
 });
 
 router.post("/api/products",[
-    body("name").notEmpty().withMessage("name ca't be empty"),
-    body("price").notEmpty().withMessage("price can't be empty"),
-    body("url").notEmpty().withMessage("url can't be empty")
+    body("name").notEmpty(),
+    body("price").notEmpty(),
+    body("url").notEmpty(),
+    body("description").notEmpty()
 ], 
 async(req,res)=>{
 
