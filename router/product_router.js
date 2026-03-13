@@ -44,7 +44,7 @@ async(req,res)=>{
 
     }catch(e){
 
-        return res.status(400).send({err:e})
+        return res.status(400).send(data);
     }
      
 
