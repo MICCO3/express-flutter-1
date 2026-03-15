@@ -17,7 +17,7 @@ const ProductSchema = new mongoose.Schema({
         
     },
     url:{
-        type:String,
+        type:Array,
         required: true
     },
     instock:{
