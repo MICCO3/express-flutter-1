@@ -1,12 +1,14 @@
 import express from "express";
-import { env } from "process";
 import productRouter from "./router/product_router.js";
 import mongoose from "mongoose";
 import cors from "cors"
+import dotenv from "dotenv"
+
+dotenv.config();
 
 const PORT = process.env.PORT || 8000
 
-mongoose.connect("mongodb+srv://admin:xBFMFIRMUKnxa5Zs@cluster0.vgeygpg.mongodb.net/myshop?appName=Cluster0")
+mongoose.connect(process.env.DB_URI)
 .then(()=>{console.log("db connected")})
 .catch(()=>{console.log("connection error")});
 
