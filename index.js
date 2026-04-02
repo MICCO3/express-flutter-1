@@ -1,5 +1,6 @@
 import express from "express";
 import productRouter from "./router/product_router.js";
+import registerRouter from "./router/auth_router.js"
 import mongoose from "mongoose";
 import cors from "cors"
 import dotenv from "dotenv"
@@ -16,6 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(productRouter);
+
 
 
 app.listen(PORT,()=>{
