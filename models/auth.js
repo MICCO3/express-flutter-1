@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-i
+
 
 const UserModel = new mongoose.Schema({
     email:{
