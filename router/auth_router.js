@@ -31,10 +31,10 @@ async(req,res)=>{
 
         await user.save();
 
-        res.statusCode(201).send({msg:"registered"})
+        res.status(201).send({msg:"registered"})
 
     }catch(err){
-        res.statusCode(500).send({msg:"failed to register"})
+        res.status(500).send({msg:"failed to register"})
     }
     
     
