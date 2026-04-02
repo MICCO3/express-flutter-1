@@ -15,7 +15,7 @@ router.post("/api/auth/register",[
 async(req,res)=>{
 
     const result = validationResult(req);
-    if(!result.isEmpty()) return res.statusCode(400)
+    if(!result.isEmpty()) return res.status(400)
         .send({msg:"invalid request"});
 
     const {body:{email,password}} = req;
@@ -48,16 +48,16 @@ router.post("/api/auth/login",
     ],
     async(req,res)=>{
         const result = validationResult(req);
-        if(!result.isEmpty()) return res.statusCode(400)
+        if(!result.isEmpty()) return res.status(400)
             .send({msg:"Invalid request"});
 
         const {boy:{email,password}} = req;
 
         try{
             const user = await AuthModel.findOne({email})
-            if(!user) res.statusCode(404).send({msg:"user not found"})
+            if(!user) res.status(404).send({msg:"user not found"})
                 const isMatch = await bcrypt.compare(password,user.password);
-            if(!isMatch) return res.statusCode(404).send({msg:"user not found"});
+            if(!isMatch) return res.status(404).send({msg:"user not found"});
             
             const token =  jwt.sign(
                 {id:user._id},
@@ -65,10 +65,10 @@ router.post("/api/auth/login",
                 {expiresIn:"7d"}
             );
 
-            return res.statusCode(201).send({token})
+            return res.status(201).send({token})
 
         }catch(err){
-            return res.statusCode(500).send({msg:err})
+            return res.status(500).send({msg:err})
         }
         
     });
