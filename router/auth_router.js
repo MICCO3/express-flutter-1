@@ -2,7 +2,7 @@ import { Router } from "express";
 import { body,validationResult,query } from "express-validator";
 import bcrypt from "bcryptjs";
 import { AuthModel } from "../models/auth.js";
-import { use } from "react";
+import jwt from "jsonwebtoken";
 
 
 const router = Router();
@@ -58,12 +58,20 @@ router.post("/api/auth/login",
             if(!user) res.statusCode(404).send({msg:"user not found"})
                 const isMatch = await bcrypt.compare(password,user.password);
             if(!isMatch) return res.statusCode(404).send({msg:"user not found"});
-            //proceed here
-        }catch(err){
             
+            const token =  jwt.sign(
+                {id:user._id},
+                process.env.JWT_SECRET,
+                {expiresIn:"7d"}
+            );
+
+            return res.statusCode(201).send({token})
+
+        }catch(err){
+            return res.statusCode(500).send({msg:err})
         }
         
-        //const isMatch = await bcrypt.compare()
-
-
     });
+
+
+export default router;
