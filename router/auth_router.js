@@ -34,7 +34,7 @@ async(req,res)=>{
 
         res.status(201).send({
             success:true,
-            message:"registered"
+            message:"registered successifully"
         })
 
     }catch(err){
