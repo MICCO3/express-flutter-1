@@ -32,10 +32,26 @@ async(req,res)=>{
 
         await user.save();
 
-        res.status(201).send({msg:"registered"})
+        res.status(201).send({
+            success:true,
+            message:"registered"
+        })
 
     }catch(err){
-        res.status(500).send({msg:err})
+        if(err.code === 11000){
+            return res.status(400).send({
+               success:false,
+               message:"account already exists" 
+            })
+        }
+
+        
+       return  res.status(500).send(
+        {
+           seccuss:false,
+           message:"server error" 
+        }
+    )
     }
     
     
