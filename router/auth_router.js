@@ -18,13 +18,14 @@ async(req,res)=>{
     if(!result.isEmpty()) return res.status(400)
         .send({msg:"invalid request"});
 
-    const {body:{email,password}} = req;
+    const {body:{name,email,password}} = req;
 
     try{
 
         const hashedPassword = await bcrypt.hash(password,10);
 
     const user = new AuthModel({
+        name:name,
         email:email,
         password:hashedPassword
     });
@@ -34,7 +35,7 @@ async(req,res)=>{
         res.status(201).send({msg:"registered"})
 
     }catch(err){
-        res.status(500).send({msg:"failed to register"})
+        res.status(500).send({msg:err})
     }
     
     
