@@ -68,7 +68,7 @@ router.post("/api/auth/login",
         if(!result.isEmpty()) return res.status(400)
             .send({msg:"Invalid request"});
 
-        const {boy:{email,password}} = req;
+        const {body:{email,password}} = req;
 
         try{
             const user = await AuthModel.findOne({email})
