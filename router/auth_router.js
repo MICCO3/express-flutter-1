@@ -72,9 +72,19 @@ router.post("/api/auth/login",
 
         try{
             const user = await AuthModel.findOne({email})
-            if(!user) res.status(404).send({msg:"user not found"})
+            if(!user) res.status(404).send(
+                {
+                    success:false,
+                    message:"user not found"
+                }
+            )
                 const isMatch = await bcrypt.compare(password,user.password);
-            if(!isMatch) return res.status(404).send({msg:"user not found"});
+            if(!isMatch) return res.status(404).send(
+                {
+                    success:false,
+                    message:"wrong password"
+                }
+            );
             
             const token =  jwt.sign(
                 {id:user._id},
@@ -82,10 +92,21 @@ router.post("/api/auth/login",
                 {expiresIn:"7d"}
             );
 
-            return res.status(201).send({token})
+            return res.status(201).send(
+                {
+                    success:true,
+                    message:"You are welcome",
+                    token
+                }
+            )
 
         }catch(err){
-            return res.status(500).send({msg:err})
+            return res.status(500).send(
+                {
+                    success:false,
+                    message:"server error"
+                }
+            )
         }
         
     });
