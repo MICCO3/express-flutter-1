@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { body,validationResult,query } from "express-validator";
+import { body,validationResult,query,param } from "express-validator";
 import bcrypt from "bcryptjs";
 import { AuthModel } from "../models/auth.js";
 import jwt from "jsonwebtoken";
@@ -7,6 +7,8 @@ import jwt from "jsonwebtoken";
 
 const router = Router();
 
+
+//register router
 
 router.post("/api/auth/register",[
     body("email").notEmpty(),
@@ -57,7 +59,7 @@ async(req,res)=>{
     
 });
 
-
+//login router
 router.post("/api/auth/login",
     [
         body("email").notEmpty(),
@@ -110,6 +112,44 @@ router.post("/api/auth/login",
         }
         
     });
+
+
+router.get("/api/auth/user/:id",
+    param("id").notEmpty().isMongoId(),
+    async(req,res)=>{
+
+    const result = validationResult(req);
+
+    if(!result.isEmpty()) return res.status(400).send(
+        {
+            success:false,
+            message:"invalid request"
+        }
+    );
+
+    const {params:{id}} = req;
+
+    const user = await AuthModel.findById(id)
+    if(!user) return res.status(404).send(
+        {
+            success:false,
+            message: "server error, login again"
+        }
+    );
+
+    return res.status(200).send(
+        {
+            success:true,
+            data:{
+                name:user.name,
+                email:user.email
+            },
+            message:"found"
+        }
+    );
+
+
+});
 
 
 export default router;
