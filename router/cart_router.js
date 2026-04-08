@@ -18,13 +18,13 @@ router.post("/api/products/cart",async(req,res)=>{
 
              cart = new CartModel({
                 userId:userId,
-                items:{
+                items:[{
                     itemId:itemId,
                     itemName:itemName,
                     itemUrl:itemUrl,
                     itemPrice:itemPrice,
                     quantity:quantity
-                }
+                }]
             })
 
 
