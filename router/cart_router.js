@@ -13,7 +13,6 @@ router.post("/api/products/cart",async(req,res)=>{
         //check if cart exist
            let cart = await CartModel.findOne({userId});
 
-           console.log(userId);
            
            if(!cart){
 
@@ -37,7 +36,7 @@ router.post("/api/products/cart",async(req,res)=>{
 
            //check if product exist
 
-           const itemIndex = CartModel.findIndex(item=>item.itemId===itemId);
+           const itemIndex = cart.items.findIndex(item=>item.itemId===itemId);
            if(itemIndex>-1){
                    return res.status(200).send("already added")     
            }else{
