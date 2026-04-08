@@ -13,6 +13,8 @@ router.post("/api/products/cart",async(req,res)=>{
         //check if cart exist
            let cart = await CartModel.findOne({userId});
 
+           console.log(userId);
+           
            if(!cart){
 
              cart = new CartModel({
@@ -51,6 +53,8 @@ router.post("/api/products/cart",async(req,res)=>{
 
 
     }catch(e){
+        console.log(e);
+        
             return res.status(500).send(e)
     }
 });
