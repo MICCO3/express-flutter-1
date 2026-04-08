@@ -37,6 +37,7 @@ router.post("/api/products/cart",async(req,res)=>{
            //check if product exist
 
            const itemIndex = cart.items.findIndex(item=>item.itemId===itemId);
+           console.log(`item index is ${itemIndex}`);
            if(itemIndex > -1){
                    return res.status(200).send("already added")     
            }else{
