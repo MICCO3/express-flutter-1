@@ -1,6 +1,7 @@
 import express from "express";
 import productRouter from "./router/product_router.js";
 import registerRouter from "./router/auth_router.js"
+import cartRouter from "./router/cart_router.js"
 import mongoose from "mongoose";
 import cors from "cors"
 import dotenv from "dotenv"
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use(productRouter);
 app.use(registerRouter);
+app.use(cartRouter);
 
 
 
