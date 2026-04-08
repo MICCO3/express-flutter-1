@@ -51,7 +51,7 @@ router.post("/api/products/cart",async(req,res)=>{
 
 
     }catch(e){
-
+            return res.status(500).send(e)
     }
 });
 
