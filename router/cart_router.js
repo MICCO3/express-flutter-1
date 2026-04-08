@@ -29,7 +29,7 @@ router.post("/api/products/cart",async(req,res)=>{
             })
 
 
-            await newCArt.save();
+            await cart.save();
 
             return res.status(201).send("cart added");
 
