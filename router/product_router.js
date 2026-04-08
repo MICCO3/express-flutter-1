@@ -74,6 +74,7 @@ router.delete("/api/products/:id",
     const {params:{id}} = req;
     const deleteProduct = await Product.findByIdAndDelete(id);
     res.status(201).send({msg:"deleted successifully"});
+    
 });
 
 
