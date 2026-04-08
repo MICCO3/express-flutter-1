@@ -41,13 +41,14 @@ router.post("/api/products/cart",async(req,res)=>{
            if(itemIndex > -1){
                    return res.status(200).send("already added")     
            }else{
-                cart["items"].push({
+                cart.items.push({
                     itemId:itemId,
                     itemName:itemName,
                     itemUrl:itemUrl,
+                    itemPrice:itemPrice,
                     quantity:quantity
                 })
-                    await cart.save();
+                    await cart.save()
                 return res.status(200).send("item added")
            }
 
