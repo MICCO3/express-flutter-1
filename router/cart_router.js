@@ -70,7 +70,7 @@ router.get("/api/products/cart/:userId",async(req,res)=>{
         }
 
     }catch(e){
-        res.status(500).send({});
+        res.status(500).send(e);
     }
     
 });
