@@ -66,6 +66,8 @@ router.get("/api/products/cart/:userId",async(req,res)=>{
         if(id){
             const cart = await CartModel.findOne({userId})
              const items = cart.items;
+             console.log(items);
+             
              res.status(200).send({items});
         }
 
