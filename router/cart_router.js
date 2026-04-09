@@ -60,5 +60,19 @@ router.post("/api/products/cart",async(req,res)=>{
     }
 });
 
+router.get("/api/products/cart/:userId",async(req,res)=>{
+    const {query:{userId}} = req;
+    try{
+        if(id){
+            const cart = await CartModel.findOne({userId})
+             const items = cart.items;
+             res.status(200).send({items});
+        }
+
+    }catch(e){
+        res.status(500).send({});
+    }
+    
+});
 
 export default router;
