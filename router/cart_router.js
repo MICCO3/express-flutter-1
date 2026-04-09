@@ -61,7 +61,7 @@ router.post("/api/products/cart",async(req,res)=>{
 });
 
 router.get("/api/products/cart/:userId",async(req,res)=>{
-    const {query:{userId}} = req;
+    const {params:{userId}} = req;
     try{
         if(userId){
             const cart = await CartModel.findOne({userId})
