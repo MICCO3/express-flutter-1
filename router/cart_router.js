@@ -3,7 +3,7 @@ import { CartModel } from "../models/cart.js";
 
 const router = Router();
 
-router.post("/api/products/cart",async(req,res)=>{
+router.post("/api/cart",async(req,res)=>{
     const {body:{
         itemId,itemName,itemPrice,itemUrl,quantity,userId
     }} = req;
@@ -60,7 +60,7 @@ router.post("/api/products/cart",async(req,res)=>{
     }
 });
 
-router.get("/api/products/cart/:userId",async(req,res)=>{
+router.get("/api/cart/:userId",async(req,res)=>{
     const {params:{userId}} = req;
     try{
         if(userId){
@@ -77,7 +77,7 @@ router.get("/api/products/cart/:userId",async(req,res)=>{
 });
 
 
-router.get("/api/products/cart/",async(req,res)=>{
+router.get("/api/cart/",async(req,res)=>{
     const {query:{userId,itemId}} = req;
     if(userId && itemId){
         res.status(200).send({
