@@ -36,7 +36,7 @@ router.post("/api/cart",async(req,res)=>{
            //check if product exist
 
            const itemIndex = cart.items.findIndex(item=>item.itemId===itemId);
-           console.log(`item index is ${itemIndex}`);
+          
            if(itemIndex > -1){
                    return res.status(200).send("already added")     
            }else{
@@ -80,7 +80,7 @@ router.get("/api/cart/",async(req,res)=>{
     const {query:{userId,itemId,operation}} = req;
     if(userId && itemId){
         const cart = await CartModel.findOne({userId})
-        if(operation=="+"){
+        if(operation==="+"){
             const items = cart.items;
             const item = items[itemId];
             item.quantity +=1;
