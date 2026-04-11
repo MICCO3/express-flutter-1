@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { CartModel } from "../models/cart.js";
+import { query } from "express-validator";
 
 const router = Router();
 
@@ -78,7 +79,7 @@ router.get("/api/cart/:userId",async(req,res)=>{
 
 router.get("/api/cart/",async(req,res)=>{
     const {query:{userId,itemId,operation}} = req;
-     return res.status(201).send(operation);
+     return res.status(201).send(query);
     if(userId && itemId){
         try{
         let cart = await CartModel.findOne({userId})
