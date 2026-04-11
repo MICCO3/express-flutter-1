@@ -12,7 +12,6 @@ router.post("/api/cart",async(req,res)=>{
 
         //check if cart exist
            let cart = await CartModel.findOne({userId});
-
            
            if(!cart){
 
@@ -78,14 +77,16 @@ router.get("/api/cart/:userId",async(req,res)=>{
 
 
 router.get("/api/cart/",async(req,res)=>{
-    const {query:{userId,itemId}} = req;
+    const {query:{userId,itemId,operation}} = req;
     if(userId && itemId){
-        res.status(200).send({
-            data:{
-                itemId,
-                userId
-            }
-        })
+        const cart = await CartModel.findOne({userId})
+        if(operation=="+"){
+            const items = cart.items;
+            const item = items[itemId];
+            item.quantity +=1;
+           await cart.save();
+        }
+
     }
 });
 
