@@ -87,8 +87,9 @@ router.get("/api/cart/",async(req,res)=>{
             //console.log(operation);
             
             const items = cart.items;
-            const item = items[itemId];
-           console.log(item);
+            const item = items.find(item=>item.itemId===itemId);
+            //const item = items[itemId];
+           //console.log(item);
            
             item.quantity ++;
                         
