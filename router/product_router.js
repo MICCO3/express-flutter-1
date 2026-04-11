@@ -17,7 +17,7 @@ router.get("/api/products/:id",
     .notEmpty().withMessage("Id can't be empty"), 
     async(req,res)=>{
         const result = validationResult(req);
-        if(!result.isEmpty())return res.statusCode(400).send({msg:"Invalid ID"});
+        if(!result.isEmpty())return res.status(400).send({msg:"Invalid ID"});
     const {params:{id}} = req;
     const product = await Product.findById(id);
     res.status(200).send(product);
@@ -32,7 +32,7 @@ router.post("/api/products",[
 async(req,res)=>{
 
     const result = validationResult(req)
-    if(!result.isEmpty()) return res.statusCode(400).send({msg:"invalid request"});
+    if(!result.isEmpty()) return res.status(400).send({msg:"invalid request"});
     
     const data = matchedData(req);
 
@@ -55,7 +55,7 @@ router.put("/api/products/:id",
     param("id").notEmpty().isMongoId(),
     async(req,res)=>{
         const result = validationResult(req);
-        if(!result.isEmpty()) return res.statusCode(400).send({msg:"invalid Id"})
+        if(!result.isEmpty()) return res.status(400).send({msg:"invalid Id"})
     const {body,params:{id}} = req;
     const updatedProduct = await Product.findByIdAndUpdate(
         id,
@@ -70,7 +70,7 @@ router.delete("/api/products/:id",
     param("id").isMongoId().notEmpty(), 
     async(req,res)=>{
         const result = validationResult(req);
-        if(!result.isEmpty()) return res.statusCode(400).send({msg:"Invalid id"})
+        if(!result.isEmpty()) return res.status(400).send({msg:"Invalid id"})
     const {params:{id}} = req;
     const deleteProduct = await Product.findByIdAndDelete(id);
     res.status(201).send({msg:"deleted successifully"});
