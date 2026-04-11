@@ -79,24 +79,28 @@ router.get("/api/cart/:userId",async(req,res)=>{
 
 router.get("/api/cart/",async(req,res)=>{
     const {query:{userId,itemId,operation}} = req;
-     //return res.status(201).send(query);
+     
     if(userId && itemId){
         try{
         let cart = await CartModel.findOne({userId})
         if(operation==="increment"){
-            //console.log(operation);
-            
+                        
             const items = cart.items;
             const item = items.find(item=>item.itemId===itemId);
-            //const item = items[itemId];
-           //console.log(item);
-           
+                      
             item.quantity ++;
                         
            await cart.save();
-           console.log(item.quantity);
            
            return res.status(201).send("increased");
+        }
+        if(operation==="decrement"){
+            const items = cart.items;
+            const item = items.find(item=>item.itemId===itemId);
+            if(item.quantity===1) return res.sendStatus(200);
+            item.quantity--
+            await cart.save();
+            return res.sendStatus(201);
         }
 
         }catch(e){
