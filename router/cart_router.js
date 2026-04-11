@@ -85,9 +85,11 @@ router.get("/api/cart/",async(req,res)=>{
             const item = items[itemId];
             item.quantity +=1;
            await cart.save();
+           return res.status(201).send("increased");
         }
 
     }
+    res.status(500).send({msg:"error"});
 });
 
 export default router;
