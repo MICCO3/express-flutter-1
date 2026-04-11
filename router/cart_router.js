@@ -83,6 +83,7 @@ router.get("/api/cart/",async(req,res)=>{
 
         const cart = await CartModel.findOne({userId})
         if(operation==="+"){
+             return res.status(201).send({op:"+"});
             const items = cart.items;
             const item = items[itemId];
             item.quantity +=1;
@@ -91,7 +92,7 @@ router.get("/api/cart/",async(req,res)=>{
         }
 
         }catch(e){
-            res.status(500).send({msg:e});
+           return res.status(500).send({msg:e});
         }
         
     }
