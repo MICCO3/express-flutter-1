@@ -83,9 +83,10 @@ router.get("/api/cart/",async(req,res)=>{
 
         let cart = await CartModel.findOne({userId})
         if(operation==="increment"){
+             return res.status(201).send(operation);
             const items = cart.items;
             const item = items[itemId];
-            return res.status(201).send(item.quantity);
+           
             item.quantity +=1;
             
            await cart.save();
