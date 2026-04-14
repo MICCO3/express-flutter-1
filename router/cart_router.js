@@ -126,12 +126,12 @@ router.get("/api/cart/",async(req,res)=>{
             return res.sendStatus(201);
         }
 
-        if(operation=="del"){
+        if(operation==="del"){
             await CartModel.updateOne(
                 {
                     userId,
                     "items.itemId":itemId,
-                    "items.quantity":1
+                   
                 },
                 {
                     $pull:{
