@@ -83,23 +83,46 @@ router.get("/api/cart/",async(req,res)=>{
     if(userId && itemId){
         try{
         let cart = await CartModel.findOne({userId})
+
         if(operation==="increment"){
+
                         
-            const items = cart.items;
-            const item = items.find(item=>item.itemId===itemId);
-                      
-            item.quantity ++;
-                        
-           await cart.save();
+            //const items = cart.items;
+        
+            //const item = items.find(item=>item.itemId===itemId);
+            //item.quantity ++;        
+            //await cart.save();
            
-           return res.status(201).send("increased");
+        await CartModel.updateOne(
+            {userId, "items.itemId":itemId},
+            {
+                $inc:{
+                    "items.$.quantity":1
+                }
+            }
+           );
+
+           return res.status(201);
+
         }
         if(operation==="decrement"){
-            const items = cart.items;
-            const item = items.find(item=>item.itemId===itemId);
-            if(item.quantity===1) return res.sendStatus(200);
-            item.quantity--
-            await cart.save();
+            // const items = cart.items;
+            // const item = items.find(item=>item.itemId===itemId);
+            // if(item.quantity===1) return res.sendStatus(200);
+            // item.quantity--
+            // await cart.save();
+            
+            await CartModel.updateOne(
+                {userId,
+                "items.itemId":itemId,
+                "items.quantity":{$gt:1}
+            },
+                {
+                    $inc:{
+                        "items.$.quantity":-1
+                    }
+                }
+            );
             return res.sendStatus(201);
         }
 
