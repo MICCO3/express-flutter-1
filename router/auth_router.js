@@ -20,7 +20,7 @@ async(req,res)=>{
     if(!result.isEmpty()) return res.status(400)
         .send({msg:"invalid request"});
 
-    const {body:{name,email,password}} = req;
+    const {body:{name,email,password,userLocation}} = req;
 
     try{
 
@@ -29,7 +29,8 @@ async(req,res)=>{
     const user = new AuthModel({
         name:name,
         email:email,
-        password:hashedPassword
+        password:hashedPassword,
+        userLocation:userLocation
     });
 
         await user.save();
