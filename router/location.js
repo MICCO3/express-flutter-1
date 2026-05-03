@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { LocationModel } from "../models/location";
+import { LocationModel } from "../models/location.js";
 const router = Router();
 
 router.post("/api/location",async(req,res)=>{
