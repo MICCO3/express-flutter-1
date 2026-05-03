@@ -13,10 +13,7 @@ router.post("/api/location",async(req,res)=>{
         // })
         res.status(201).send(data);
     }catch(e){
-        res.status(500).send({
-            success:true,
-            message:"succesfully saved"
-        });
+        res.status(500).send(e);
     }
     
 })
