@@ -6,7 +6,7 @@ router.post("/api/location",async(req,res)=>{
     const {body:{region,districts}} = req;
     const location = new LocationModel({region,districts})
     try{
-      const data =   await Location.save();
+      const data =   await location.save();
         // res.status(200).send({
            // success:true,
           //  message:"succesfully saved"
