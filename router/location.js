@@ -13,7 +13,7 @@ router.post("/api/location",async(req,res)=>{
         // })
         res.status(201).send(data);
     }catch(e){
-        res.status(500).send(e);
+        res.status(e.code).send(e.code);;
     }
     
 })
