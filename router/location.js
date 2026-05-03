@@ -8,8 +8,8 @@ router.post("/api/location",async(req,res)=>{
     try{
       const data =   await Location.save();
         // res.status(200).send({
-            success:true,
-            message:"succesfully saved"
+           // success:true,
+          //  message:"succesfully saved"
         // })
         res.status(201).send(data);
     }catch(e){
